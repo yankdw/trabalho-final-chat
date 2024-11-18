@@ -1,19 +1,19 @@
 import socket
 import threading
 
-# Função principal do cliente
+
 def cliente_chat():
-    HOST = '26.206.166.193'  # IP do servidor
-    PORTA = 8080             # Porta do servidor
+    HOST = '26.206.166.193'  
+    PORTA = 8080            
 
     nome = input("Digite seu nome: ")
     cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     cliente.connect((HOST, PORTA))
 
-    # Enviar nome para o servidor
+
     cliente.send(nome.encode())
 
-    # Thread para receber mensagens do servidor
+
     def receber_mensagens():
         while True:
             try:
@@ -27,7 +27,7 @@ def cliente_chat():
     th_receber = threading.Thread(target=receber_mensagens)
     th_receber.start()
 
-    # Loop para enviar mensagens para o servidor
+
     while True:
         mensagem = input()
         if mensagem.lower() == "/sair":
@@ -35,5 +35,5 @@ def cliente_chat():
             break
         cliente.send(mensagem.encode())
 
-# Iniciar o cliente
+
 cliente_chat()
